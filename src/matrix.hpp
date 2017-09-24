@@ -47,7 +47,7 @@ public:
         Matrix m = zero(v.rows(), v.rows());
 
         for (size_t i = 0; i < v.rows(); i++)
-                m.at(i, i) = v.at(i, 0);
+            m.at(i, i) = v.at(i, 0);
 
         return m;
     }

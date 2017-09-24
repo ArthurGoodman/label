@@ -9,7 +9,6 @@
 int main() {
     using ValueType = ValueWrapper<int64_t, oper::max, oper::plus>;
 
-    static constexpr size_t n = 3;
     static constexpr size_t k = 3;
 
     std::vector<Matrix<ValueType>> q;
