@@ -30,7 +30,7 @@ struct min {
 
     static constexpr T zero = std::numeric_limits<T>::has_infinity
                                   ? std::numeric_limits<T>::infinity()
-                                  : std::numeric_limits<T>::max();
+                                  : std::numeric_limits<T>::max() / 2;
 };
 
 template <class T>
