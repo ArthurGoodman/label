@@ -28,7 +28,9 @@ struct min {
         return std::min(lhs, rhs);
     }
 
-    static constexpr T zero = std::numeric_limits<T>::max();
+    static constexpr T zero = std::numeric_limits<T>::has_infinity
+                                  ? std::numeric_limits<T>::infinity()
+                                  : std::numeric_limits<T>::max();
 };
 
 template <class T>
@@ -37,7 +39,9 @@ struct max {
         return std::max(lhs, rhs);
     }
 
-    static constexpr T zero = std::numeric_limits<T>::min();
+    static constexpr T zero = std::numeric_limits<T>::has_infinity
+                                  ? -std::numeric_limits<T>::infinity()
+                                  : std::numeric_limits<T>::min();
 };
 
 template <class T>

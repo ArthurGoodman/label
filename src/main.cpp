@@ -6,8 +6,8 @@
 #include "solver.hpp"
 #include "valuewrapper.hpp"
 
-int main() {
-    using ValueType = ValueWrapper<int64_t, oper::max, oper::plus>;
+int main(int argc, char **argv) {
+    using ValueType = ValueWrapper<int, oper::max, oper::plus>;
 
     static constexpr size_t k = 3;
 
@@ -45,7 +45,7 @@ int main() {
     G.back().at(2, 1) = 2;
     G.back().at(2, 2) = 1;
 
-    std::cout << Solver::solve(q, G) << std::endl;
+    std::cout << "Result = " << Solver::solve(q, G, false) << std::endl;
 
     return 0;
 }
