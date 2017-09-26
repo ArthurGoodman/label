@@ -51,9 +51,9 @@ public:
         return TPlus<T>::zero;
     }
 
-    static This one() {
-        return TMult<T>::zero;
-    }
+    // static This one() {
+    //     return TMult<T>::zero;
+    // }
 
 private:
     T m_value;

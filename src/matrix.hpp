@@ -26,20 +26,20 @@ public:
         return m;
     }
 
-    static Matrix<T> one(size_t rows, size_t cols) {
-        Matrix m(rows, cols);
-        std::fill(m.m_data.begin(), m.m_data.end(), T::one());
-        return m;
-    }
+    // static Matrix<T> one(size_t rows, size_t cols) {
+    //     Matrix m(rows, cols);
+    //     std::fill(m.m_data.begin(), m.m_data.end(), T::one());
+    //     return m;
+    // }
 
-    static Matrix<T> identity(size_t size) {
-        Matrix m = zero(size, size);
+    // static Matrix<T> identity(size_t size) {
+    //     Matrix m = zero(size, size);
 
-        for (size_t i = 0; i < size; i++)
-            m.at(i, i) = T::one();
+    //     for (size_t i = 0; i < size; i++)
+    //         m.at(i, i) = T::one();
 
-        return m;
-    }
+    //     return m;
+    // }
 
     static Matrix<T> diagonal(const Matrix &v) {
         assert(v.cols() == 1);

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <fstream>
-#include <iostream>
 #include <string>
 
 #include <rapidjson/document.h>
@@ -50,6 +49,9 @@ Task<T> parseJsonFile(const std::string &fileName) {
         task.vertices.push_back(Matrix<T>::zero(k, 1));
 
         for (size_t i = 0; i < vertices[c].Size(); i++) {
+            if (vertices[c][i].IsNull())
+                continue;
+
             assert(vertices[c][i].IsNumber());
             task.vertices.back().at(i, 0) = vertices[c][i].GetDouble();
         }
@@ -66,13 +68,16 @@ Task<T> parseJsonFile(const std::string &fileName) {
         if (edges[c].Size() != k)
             throw std::runtime_error("invalid edge matrix");
 
-        task.edges.push_back(Matrix<T>::one(k, k));
+        task.edges.push_back(Matrix<T>::zero(k, k));
 
         for (size_t i = 0; i < edges[c].Size(); i++) {
             if (edges[c][i].Size() != k)
                 throw std::runtime_error("invalid edge matrix");
 
             for (size_t j = 0; j < edges[c][i].Size(); j++) {
+                if (edges[c][i][j].IsNull())
+                    continue;
+
                 assert(edges[c][i][j].IsNumber());
                 task.edges.back().at(i, j) = edges[c][i][j].GetDouble();
             }
