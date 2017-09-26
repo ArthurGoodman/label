@@ -15,7 +15,7 @@ public:
 
         for (size_t i = 0; i < G.size(); i++) {
             if (verbose) {
-                std::cout << "diag(q[" << i << "]) = \n" << Matrix<T>::diagonal(q[i]) << "\n";
+                std::cout << "q[" << i << "] = \n" << q[i] << "\n";
                 std::cout << "G[" << i << "] = \n" << G[i] << "\n";
             }
 
