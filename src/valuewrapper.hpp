@@ -4,6 +4,8 @@
 
 #include "operators.hpp"
 
+namespace label {
+
 template <
     class T,
     template <class> class TPlus = oper::plus,
@@ -61,3 +63,5 @@ private:
     TPlus<T> m_plus;
     TMult<T> m_mult;
 };
+
+} // namespace label

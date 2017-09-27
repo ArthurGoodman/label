@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+namespace label {
+
 template <class T>
 class Matrix {
 public:
@@ -114,3 +116,5 @@ private:
     size_t m_rows, m_cols;
     std::vector<T> m_data;
 };
+
+} // namespace label

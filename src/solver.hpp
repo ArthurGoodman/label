@@ -6,6 +6,8 @@
 
 #include "matrix.hpp"
 
+namespace label {
+
 class Solver {
 public:
     template <class T>
@@ -44,3 +46,5 @@ public:
         return sum;
     }
 };
+
+} // namespace label

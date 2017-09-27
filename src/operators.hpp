@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <limits>
 
+namespace label {
 namespace oper {
+
 template <class T>
 struct or_ {
     T operator()(const T &lhs, const T &rhs) const {
@@ -63,4 +65,5 @@ struct mult {
 };
 
 } // namespace oper
+} // namespace label
 

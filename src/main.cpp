@@ -1,14 +1,17 @@
 #include <iostream>
+#include <stdexcept>
 
-#include "jsonparser.hpp"
-#include "solver.hpp"
-#include "valuewrapper.hpp"
+#include "application.hpp"
 
 int main(int argc, char **argv) {
-    using ValueType = ValueWrapper<double, oper::max, oper::plus>;
-
-    Task<ValueType> task = parseJsonFile<ValueType>("data.json");
-    std::cout << "Result = " << Solver::solve(task.vertices, task.edges, true) << std::endl;
+    try {
+        label::Application app(argc, argv);
+        app.exec();
+    } catch (const std::runtime_error &e) {
+        std::cout << "runtime error: " << e.what() << std::endl;
+    } catch (...) {
+        std::cout << "Something bad happened..." << std::endl;
+    }
 
     return 0;
 }

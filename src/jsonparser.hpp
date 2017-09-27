@@ -2,12 +2,21 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 #include <rapidjson/document.h>
 #include <rapidjson/error/en.h>
 #include <rapidjson/istreamwrapper.h>
 
-#include "task.hpp"
+#include "matrix.hpp"
+
+namespace label {
+
+template <class T>
+struct Task {
+    std::vector<Matrix<T>> vertices;
+    std::vector<Matrix<T>> edges;
+};
 
 #undef assert
 #define assert(value) \
@@ -17,6 +26,10 @@
 template <class T>
 Task<T> parseJsonFile(const std::string &fileName) {
     std::ifstream file(fileName);
+
+    if (!file)
+        throw std::runtime_error("error opening file \'" + fileName + "'");
+
     rapidjson::IStreamWrapper stream(file);
 
     rapidjson::Document document;
@@ -24,7 +37,7 @@ Task<T> parseJsonFile(const std::string &fileName) {
 
     if (document.HasParseError())
         throw std::runtime_error(
-            "parse error: " + std::string(GetParseError_En(document.GetParseError())));
+            "rapidjson: " + std::string(GetParseError_En(document.GetParseError())));
 
     Task<T> task;
 
@@ -86,3 +99,5 @@ Task<T> parseJsonFile(const std::string &fileName) {
 
     return task;
 }
+
+} // namespace label
