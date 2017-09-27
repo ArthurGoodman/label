@@ -41,7 +41,7 @@ public:
     //     return m;
     // }
 
-    static Matrix<T> diagonal(const Matrix &v) {
+    static Matrix<T> diag(const Matrix &v) {
         assert(v.cols() == 1);
 
         Matrix m = zero(v.rows(), v.rows());

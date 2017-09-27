@@ -19,10 +19,11 @@ public:
                 std::cout << "G[" << i << "] = \n" << G[i] << "\n";
             }
 
-            G[i] = Matrix<T>::diagonal(q[i]) * G[i];
+            G[i] = Matrix<T>::diag(q[i]) * G[i];
 
             if (verbose)
-                std::cout << "diag(q[" << i << "]) * G[" << i << "] = \n" << G[i] << "\n";
+                std::cout << "G[" << i << "] := diag(q[" << i << "]) * G[" << i << "] = \n"
+                          << G[i] << "\n";
         }
 
         Matrix<T> r = std::accumulate(++G.begin(), G.end(), G[0], std::multiplies<Matrix<T>>());
@@ -32,11 +33,14 @@ public:
 
         r *= q.back();
 
+        T sum = r.sum();
+
         if (verbose) {
             std::cout << "q[" << q.size() - 1 << "] = \n" << q.back() << "\n";
-            std::cout << "*(G[i]) * q[" << q.size() - 1 << "] = \n" << r << "\n";
+            std::cout << "R := *(G[i]) * q[" << q.size() - 1 << "] = \n" << r << "\n";
+            std::cout << "+(R) = " << sum << "\n\n";
         }
 
-        return r.sum();
+        return sum;
     }
 };
