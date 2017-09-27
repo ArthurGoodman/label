@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include "assert.hpp"
+
 namespace label {
 
 template <class T>

@@ -4,6 +4,7 @@
 #include <numeric>
 #include <vector>
 
+#include "assert.hpp"
 #include "matrix.hpp"
 
 namespace label {

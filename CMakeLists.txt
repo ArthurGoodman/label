@@ -14,4 +14,4 @@ add_custom_target(run
     DEPENDS ${PROJECT_NAME}
     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR})
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)

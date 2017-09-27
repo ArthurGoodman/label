@@ -8,6 +8,7 @@
 #include <rapidjson/error/en.h>
 #include <rapidjson/istreamwrapper.h>
 
+#include "assert.hpp"
 #include "matrix.hpp"
 
 namespace label {
@@ -18,17 +19,12 @@ struct Task {
     std::vector<Matrix<T>> edges;
 };
 
-#undef assert
-#define assert(value) \
-    if (!(value))     \
-        throw std::runtime_error("assertion `" + std::string(#value) + "' failed'");
-
 template <class T>
 Task<T> parseJsonFile(const std::string &fileName) {
     std::ifstream file(fileName);
 
     if (!file)
-        throw std::runtime_error("error opening file \'" + fileName + "'");
+        throw std::runtime_error("cannot open file \'" + fileName + "'");
 
     rapidjson::IStreamWrapper stream(file);
 
