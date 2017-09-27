@@ -15,16 +15,16 @@ namespace label {
 
 template <class T>
 struct Task {
-    std::vector<Matrix<T>> vertices;
-    std::vector<Matrix<T>> edges;
+    std::vector<Matrix<T>> m_vertices;
+    std::vector<Matrix<T>> m_edges;
 };
 
 template <class T>
-Task<T> parseJsonFile(const std::string &fileName) {
-    std::ifstream file(fileName);
+Task<T> parseJsonFile(const std::string &file_name) {
+    std::ifstream file(file_name);
 
     if (!file)
-        throw std::runtime_error("cannot open file \'" + fileName + "'");
+        throw std::runtime_error("cannot open file \'" + file_name + "'");
 
     rapidjson::IStreamWrapper stream(file);
 
@@ -55,14 +55,14 @@ Task<T> parseJsonFile(const std::string &fileName) {
         else if (vertices[c].Size() != k)
             throw std::runtime_error("inconsistent vector sizes");
 
-        task.vertices.push_back(Matrix<T>::zero(k, 1));
+        task.m_vertices.push_back(Matrix<T>::zero(k, 1));
 
         for (size_t i = 0; i < vertices[c].Size(); i++) {
             if (vertices[c][i].IsNull())
                 continue;
 
             assert(vertices[c][i].IsNumber());
-            task.vertices.back().at(i, 0) = vertices[c][i].GetDouble();
+            task.m_vertices.back().at(i, 0) = vertices[c][i].GetDouble();
         }
     }
 
@@ -77,7 +77,7 @@ Task<T> parseJsonFile(const std::string &fileName) {
         if (edges[c].Size() != k)
             throw std::runtime_error("invalid edge matrix");
 
-        task.edges.push_back(Matrix<T>::zero(k, k));
+        task.m_edges.push_back(Matrix<T>::zero(k, k));
 
         for (size_t i = 0; i < edges[c].Size(); i++) {
             if (edges[c][i].Size() != k)
@@ -88,7 +88,7 @@ Task<T> parseJsonFile(const std::string &fileName) {
                     continue;
 
                 assert(edges[c][i][j].IsNumber());
-                task.edges.back().at(i, j) = edges[c][i][j].GetDouble();
+                task.m_edges.back().at(i, j) = edges[c][i][j].GetDouble();
             }
         }
     }

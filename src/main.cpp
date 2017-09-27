@@ -1,12 +1,26 @@
 #include <iostream>
-#include <stdexcept>
 
-#include "application.hpp"
+#include "jsonparser.hpp"
+#include "solver.hpp"
+#include "valuewrapper.hpp"
 
-int main(int argc, char **argv) {
+namespace label {
+
+const char *file_name = "data.json";
+bool verbose = true;
+
+using ValueType = ValueWrapper<double, oper::max, oper::plus>;
+
+void run() {
+    Task<ValueType> task = parseJsonFile<ValueType>(file_name);
+    std::cout << "Result = " << Solver::solve(task.m_vertices, task.m_edges, verbose) << std::endl;
+}
+
+} // namespace label
+
+int main() {
     try {
-        label::Application app(argc, argv);
-        app.exec();
+        label::run();
     } catch (const std::runtime_error &e) {
         std::cout << "runtime error: " << e.what() << std::endl;
     } catch (...) {
