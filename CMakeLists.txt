@@ -3,15 +3,17 @@ project(label)
 
 set(CMAKE_CXX_STANDARD 11)
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
-add_executable(${PROJECT_NAME} ${SOURCES})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-target_include_directories(${PROJECT_NAME}
-    PRIVATE ${CMAKE_SOURCE_DIR}/ext/rapidjson/include)
+set(LABEL label)
 
-add_custom_target(run
-    COMMAND ${PROJECT_NAME}
-    DEPENDS ${PROJECT_NAME}
-    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR})
+file(GLOB_RECURSE SOURCES src/*.cpp src/*.hpp)
+add_library(${LABEL} ${SOURCES})
+set_target_properties(${LABEL} PROPERTIES LINKER_LANGUAGE CXX)
 
-set(CMAKE_BUILD_TYPE Release)
+target_include_directories(${LABEL}
+    PUBLIC src)
+
+add_subdirectory(test)
