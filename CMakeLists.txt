@@ -16,4 +16,6 @@ set_target_properties(${LABEL} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${LABEL}
     PUBLIC src)
 
+if(${BUILD_TESTS})
 add_subdirectory(test)
+endif()

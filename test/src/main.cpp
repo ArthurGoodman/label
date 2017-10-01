@@ -22,7 +22,7 @@ int main(int argc, const char **argv) {
         if (argc > 1)
             label::run(argv[1]);
         else
-            throw std::runtime_error("no input file given\nUsage: label <input_file_name>");
+            throw std::runtime_error("no input file given\nusage: label <input_file_name>");
     } catch (const std::runtime_error &e) {
         std::cout << "error: " << e.what() << std::endl;
     } catch (...) {
