@@ -14,7 +14,8 @@ class ValueWrapper {
     using This = ValueWrapper<T, TPlus, TMult>;
 
 public:
-    ValueWrapper() {
+    ValueWrapper()
+        : m_value{} {
     }
 
     ValueWrapper(T value)
@@ -49,6 +50,14 @@ public:
         return m_value;
     }
 
+    static This argplus(const std::vector<This> &v, size_t &arg) {
+        return TPlus<T>::arg(unwrapVector(v), arg);
+    }
+
+    static This argmult(const std::vector<This> &v, size_t &arg) {
+        return TMult<T>::arg(unwrapVector(v), arg);
+    }
+
     static This zero() {
         return TPlus<T>::zero;
     }
@@ -56,6 +65,15 @@ public:
     // static This one() {
     //     return TMult<T>::zero;
     // }
+
+private:
+    static std::vector<T> unwrapVector(const std::vector<This> &v) {
+        static constexpr auto unwrap = [](const This &t) -> T { return t; };
+
+        std::vector<T> vt;
+        std::transform(v.begin(), v.end(), std::back_inserter(vt), unwrap);
+        return vt;
+    }
 
 private:
     T m_value;
