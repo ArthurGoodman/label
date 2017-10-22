@@ -50,12 +50,12 @@ public:
         return m_value;
     }
 
-    static This argplus(const std::vector<This> &v, size_t &arg) {
-        return TPlus<T>::arg(unwrapVector(v), arg);
+    static size_t argplus(const std::vector<This> &v) {
+        return TPlus<T>::arg(unwrapVector(v));
     }
 
-    static This argmult(const std::vector<This> &v, size_t &arg) {
-        return TMult<T>::arg(unwrapVector(v), arg);
+    static size_t argmult(const std::vector<This> &v) {
+        return TMult<T>::arg(unwrapVector(v));
     }
 
     static This zero() {

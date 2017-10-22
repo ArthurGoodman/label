@@ -14,8 +14,9 @@ struct or_ {
         return lhs || rhs;
     }
 
-    static T arg(const std::vector<T> &v, size_t &i) {
+    static size_t arg(const std::vector<T> &v) {
         std::runtime_error("operation 'argor' doesn't make sense");
+        return -1;
     }
 
     static constexpr T zero = 0;
@@ -27,8 +28,9 @@ struct and_ {
         return lhs && rhs;
     }
 
-    static T arg(const std::vector<T> &v, size_t &i) {
+    static size_t arg(const std::vector<T> &v) {
         std::runtime_error("operation 'argand' doesn't make sense");
+        return -1;
     }
 
     static constexpr T zero = 1;
@@ -40,8 +42,9 @@ struct min {
         return std::min(lhs, rhs);
     }
 
-    static T arg(const std::vector<T> &v, size_t &arg) {
+    static size_t arg(const std::vector<T> &v) {
         T min = std::numeric_limits<T>::max();
+        size_t arg = -1;
 
         for (size_t i = 0; i < v.size(); i++)
             if (v[i] < min) {
@@ -49,7 +52,7 @@ struct min {
                 arg = i;
             }
 
-        return min;
+        return arg;
     }
 
     static constexpr T zero = std::numeric_limits<T>::has_infinity
@@ -63,8 +66,9 @@ struct max {
         return std::max(lhs, rhs);
     }
 
-    static T arg(const std::vector<T> &v, size_t &arg) {
+    static size_t arg(const std::vector<T> &v) {
         T max = std::numeric_limits<T>::min();
+        size_t arg = -1;
 
         for (size_t i = 0; i < v.size(); i++)
             if (v[i] > max) {
@@ -72,7 +76,7 @@ struct max {
                 arg = i;
             }
 
-        return max;
+        return arg;
     }
 
     static constexpr T zero = std::numeric_limits<T>::has_infinity
@@ -86,8 +90,9 @@ struct plus {
         return lhs + rhs;
     }
 
-    static T arg(const std::vector<T> &v, size_t &i) {
+    static size_t arg(const std::vector<T> &v) {
         std::runtime_error("operation 'argplus' doesn't make sense");
+        return -1;
     }
 
     static constexpr T zero = 0;
@@ -99,8 +104,9 @@ struct mult {
         return lhs * rhs;
     }
 
-    static T arg(const std::vector<T> &v, size_t &i) {
+    static size_t arg(const std::vector<T> &v) {
         std::runtime_error("operation 'argmult' doesn't make sense");
+        return -1;
     }
 
     static constexpr T zero = 1;
