@@ -15,7 +15,7 @@ class ValueWrapper {
 
 public:
     ValueWrapper()
-        : m_value{} {
+        : m_value(TPlus<T>::zero) {
     }
 
     ValueWrapper(T value)
