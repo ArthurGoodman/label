@@ -9,12 +9,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 set(LABEL label)
 
-file(GLOB_RECURSE SOURCES src/*.cpp src/*.hpp)
-add_library(${LABEL} ${SOURCES})
-set_target_properties(${LABEL} PROPERTIES LINKER_LANGUAGE CXX)
-
-target_include_directories(${LABEL}
-    PUBLIC src)
+add_library(${LABEL} INTERFACE)
+target_include_directories(${LABEL} INTERFACE src)
 
 if(${BUILD_TESTS})
 add_subdirectory(test)
