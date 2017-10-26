@@ -45,12 +45,12 @@ Task<T> parseJsonFile(const std::string &file_name) {
     rapidjson::Value &vertices = document["vertices"];
     assert(vertices.IsArray());
 
-    int k = -1;
+    size_t k = -1;
 
     for (size_t c = 0; c < vertices.Size(); c++) {
         assert(vertices[c].IsArray());
 
-        if (k == -1)
+        if (k == (size_t)-1)
             k = vertices[c].Size();
         else if (vertices[c].Size() != k)
             throw std::runtime_error("inconsistent vector sizes");
