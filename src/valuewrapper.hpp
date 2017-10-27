@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <iterator>
 
 #include "operators.hpp"
 
@@ -68,7 +69,7 @@ public:
 
 private:
     static std::vector<T> unwrapVector(const std::vector<This> &v) {
-        static constexpr auto unwrap = [](const This &t) -> T { return t; };
+        static const auto unwrap = [](const This &t) -> T { return t; };
 
         std::vector<T> vt;
         std::transform(v.begin(), v.end(), std::back_inserter(vt), unwrap);
